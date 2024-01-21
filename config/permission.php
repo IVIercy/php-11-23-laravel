@@ -188,24 +188,24 @@ return [
         'categories' => [
             'publish' => 'publish categories',
             'edit' => 'edit categories',
-            'delete' => 'delete categories'
+            'delete' => 'delete categories',
         ],
         'products' => [
             'publish' => 'publish products',
             'edit' => 'edit products',
-            'delete' => 'delete products'
+            'delete' => 'delete products',
         ],
         'orders' => [
             'edit' => 'edit orders',
-            'delete' => 'delete orders'
+            'delete' => 'delete orders',
         ],
         'users' => [
             'edit' => 'edit users',
-            'delete' => 'delete users'
+            'delete' => 'delete users',
         ],
         'account' => [
             'edit' => 'edit account',
-            'delete' => 'delete account'
-        ]
-    ]
+            'delete' => 'delete account',
+        ],
+    ],
 ];

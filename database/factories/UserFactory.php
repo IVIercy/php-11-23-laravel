@@ -54,7 +54,8 @@ class UserFactory extends Factory
         });
     }
 
-    public function withEmail(string $email) {
-        return $this->state(fn(array $attrs) => ['email' =>$email]);
+    public function withEmail(string $email)
+    {
+        return $this->state(fn (array $attrs) => ['email' => $email]);
     }
 }

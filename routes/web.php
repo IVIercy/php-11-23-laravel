@@ -20,3 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::name('admin.')->prefix('admin')->middleware(['role:admin|moderator'])->group(function () {
+    Route::get('dashboard', \App\Http\Controllers\Admin\DashboardController::class)->name('dashboard');
+});
