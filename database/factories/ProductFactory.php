@@ -29,7 +29,7 @@ class ProductFactory extends Factory
             'price' => $price,
             'new_price' => (rand(1, 5) % 2 === 0 ? fake()->randomFloat(2, 5, ($price - ($price * 0.05))) : null),
             'quantity' => rand(0, 20),
-            'thumbnail' => fake()->imageUrl()
+            'thumbnail' => fake()->imageUrl(),
         ];
     }
 }

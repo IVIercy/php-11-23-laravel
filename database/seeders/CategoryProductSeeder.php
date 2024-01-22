@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +20,7 @@ class CategoryProductSeeder extends Seeder
 
         $createProduct = function (Category $category) {
             $category->products()->attach(
-                Product::factory(rand(2,5))->create()->pluck('id')
+                Product::factory(rand(2, 5))->create()->pluck('id')
             );
         };
 
