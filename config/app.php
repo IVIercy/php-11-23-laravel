@@ -169,6 +169,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+        LaraIzitoast\LaraIzitoastServiceProvider::class,
     ])->toArray(),
 
     /*
