@@ -2,10 +2,21 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\ProductsRepositoryContract;
+use App\Repositories\ProductsRepository;
+use App\Services\Contract\FileStorageServiceContract;
+use App\Services\FileStorageService;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public array $bindings = [
+        FileStorageServiceContract::class => FileStorageService::class,
+        ProductsRepositoryContract::class => ProductsRepository::class,
+        ImageRepositoryContract::class => ImageRepository::class,
+    ];
+
     /**
      * Register any application services.
      */
@@ -19,6 +30,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Paginator::useBootstrapFive();
     }
 }
