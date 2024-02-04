@@ -50,6 +50,7 @@ class Product extends Model
             $fileStorage->remove($this->attributes['thumbnail']);
         }
 
+        // public/iphone/____.jpeg
         $this->attributes['thumbnail'] = $fileStorage->upload(
             $image,
             $this->attributes['slug']

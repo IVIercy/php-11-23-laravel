@@ -54,6 +54,20 @@ class UserFactory extends Factory
         });
     }
 
+    public function asAdmin()
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(Roles::ADMIN->value);
+        });
+    }
+
+    public function asModerator()
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(Roles::MODERATOR->value);
+        });
+    }
+
     public function withEmail(string $email)
     {
         return $this->state(fn (array $attrs) => ['email' => $email]);
