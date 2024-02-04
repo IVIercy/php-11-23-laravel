@@ -25,7 +25,7 @@
                         -
                     @endif
                 </td>
-                <td>{{$category->products->count}}</td>
+                <td>{{$category->products_count}}</td>
                 <td>{{$category->created_at}}</td>
                 <td>{{$category->updated_at}}</td>
                 <td>

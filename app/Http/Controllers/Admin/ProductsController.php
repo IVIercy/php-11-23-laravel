@@ -41,31 +41,22 @@ class ProductsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Product $product)
     {
-        $products = Product::where('id', '!=', $product->id)->get();
-        return view('admin/products/edit', compact('product', 'products'));
+        $categories = Category::all();
+        $productCategories = $product->categories()->get()->pluck('id')->toArray();
+
+        return view('admin/products/edit', compact('product', 'categories', 'productCategories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(CreateProductRequest $request, Product $product)
+    public function update(CreateProductRequest $request, Product $product,  ProductsRepositoryContract $repository)
     {
-        $data = $request->validated();
-        $data['slug'] = Str::of($data['name'])->slug()->value();
-
-        return $product->updateOrFail($data)
+        return $repository->update($product, $request)
             ? redirect()->route('admin.products.edit', $product)
             : redirect()->back()->withInput();
     }
@@ -75,13 +66,8 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
-        $this->middleware('permission:'.config('permission.permissions.products.delete'));
-
-        if ($product->images()->exists()) {
-            $product->images()->update(['id' => null]);
-        }
-
-        $product->deleteOrFail();
+        $product->categories()->detach();
+        $product->delete();
 
         return redirect()->route('admin.products.index');
     }
