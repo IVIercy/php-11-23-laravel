@@ -9,7 +9,6 @@ use App\Repositories\Contracts\ImageRepositoryContract;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-
 class ProductsRepository implements Contracts\ProductsRepositoryContract
 {
     public function __construct(protected ImageRepositoryContract $imageRepo)
@@ -23,7 +22,6 @@ class ProductsRepository implements Contracts\ProductsRepositoryContract
 
             $data = $this->formRequestData($request);
             $data['attributes'] = $this->addSlugToAttributes($data['attributes']);
-
             $product = Product::create($data['attributes']);
 
             $this->setProductData($product, $data);
