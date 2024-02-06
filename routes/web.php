@@ -16,3 +16,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::name('ajax.')->prefix('ajax')->middleware('auth')->group(function() {
+    Route::group(['role:admin|moderator'], function() {
+        Route::post('products/{product}/images', [\App\Http\Controllers\Ajax\Products\ImagesController::class, 'store'])->name('products.images.store');
+        Route::delete('images/{image}', \App\Http\Controllers\Ajax\RemoveImagesController::class)->name('images.destroy');
+    });
+});
+
+Route::name('admin.')->prefix('admin')->middleware(['role:admin|moderator'])->group(function () {
+    Route::get('dashboard', \App\Http\Controllers\Admin\DashboardController::class)->name('dashboard');
+    Route::resource('categories', \App\Http\Controllers\Admin\CategoriesController::class)
+        ->except(['show']);
+    Route::resource('products', \App\Http\Controllers\Admin\ProductsController::class)
+        ->except(['show']);
+});
