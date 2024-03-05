@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Categories\CreateCategoryRequest;
 use App\Http\Requests\Categories\EditCategoryRequest;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class CategoriesController extends Controller
@@ -15,9 +16,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::with(['products', 'parent'])->sortable()->paginate(10);
-        notify('Quick notification');
-
+        $categories = Category::with(['parent'])->withCount(['products'])->sortable()->paginate(10);
         return view('admin/categories/index', compact('categories'));
     }
 
@@ -40,7 +39,6 @@ class CategoriesController extends Controller
         Category::create($data);
 
         notify()->success("Category '$data[name]' was created!");
-
         return redirect()->route('admin.categories.index');
     }
 
@@ -50,7 +48,6 @@ class CategoriesController extends Controller
     public function edit(Category $category)
     {
         $categories = Category::where('id', '!=', $category->id)->get();
-
         return view('admin/categories/edit', compact('category', 'categories'));
     }
 
@@ -74,7 +71,7 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
-        $this->middleware('permission:'.config('permission.permissions.categories.delete'));
+        $this->middleware('permission:' . config('permission.permissions.categories.delete'));
 
         if ($category->childs()->exists()) {
             $category->childs()->update(['parent_id' => null]);
