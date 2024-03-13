@@ -32,7 +32,7 @@ return [
     ],
 
     'currency' => [
-        'code' => 'eur',
+        'code' => 'usd',
 
         /*
          * Usually cents
@@ -41,7 +41,7 @@ return [
          * Example: Amount in words: Eight hundred fifty thousand sixty-eight EUR and fifteen ct.
          */
         'fraction' => 'ct.',
-        'symbol'   => '€',
+        'symbol'   => '$',
 
         /*
          * Example: 19.00
@@ -72,7 +72,7 @@ return [
         'orientation' => 'portrait',
     ],
 
-    'disk' => 'local',
+    'disk' => 'public',
 
     'seller' => [
         /*
