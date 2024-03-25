@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('wish_list', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('user_id')->constrained('users');
+            $table->boolean('price')->default(false);
+            $table->boolean('exist')->default(false);
             $table->timestamps();
         });
     }
